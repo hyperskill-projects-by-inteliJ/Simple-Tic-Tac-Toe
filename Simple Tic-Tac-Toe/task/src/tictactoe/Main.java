@@ -32,23 +32,9 @@ public class Main {
     public static void createCell() {
         printBoundaries();
 
-        int cellInputLength = cellInput.size();
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < cellInputLength; i++) {
-            if (i % 3 == 0) {
-                sb.append("| ").append(cellInput.get(i)).append(" ");
-            } else if ((i + 1) % 3 == 0) {
-                sb.append(cellInput.get(i)).append(" ").append("|");
-            } else {
-                sb.append(cellInput.get(i)).append(" ");
-            }
-
-            if (i < cellInputLength - 1 && (i + 1) % 3 == 0) {
-                sb.append("\n");
-            }
-        }
-        System.out.println(sb);
+        System.out.printf("| %s %s %s |\n", cellInput.get(0), cellInput.get(1), cellInput.get(2));
+        System.out.printf("| %s %s %s |\n", cellInput.get(3), cellInput.get(4), cellInput.get(5));
+        System.out.printf("| %s %s %s |\n", cellInput.get(6), cellInput.get(7), cellInput.get(8));
 
         printBoundaries();
     }
@@ -89,7 +75,6 @@ public class Main {
 
         for (int[] combo : winningCombinations
         ) {
-            System.out.println(letter + " " + Arrays.toString(combo));
             comboLength = combo.length;
 
             combo:
