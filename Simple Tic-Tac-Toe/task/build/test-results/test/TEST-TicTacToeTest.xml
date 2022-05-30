@@ -1,39 +1,191 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-29T12:05:07" hostname="MRR-PC" time="0.075">
+<testsuite name="TicTacToeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-05-30T09:59:09" hostname="MRR-PC" time="0.135">
   <properties/>
-  <testcase name="start" classname="TicTacToeTest" time="0.075"/>
+  <testcase name="start" classname="TicTacToeTest" time="0.135"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
-Enter cells: > O_OXXO_XX
+Enter cells: > XXXOO__O_
 ---------
-| O _ O |
-| X X O |
-| _ X X |
+| X X X |
+| O O _ |
+| _ O _ |
 ---------
+X [0, 1, 2]
+O [0, 1, 2]
+O [3, 4, 5]
+O [6, 7, 8]
+O [0, 3, 6]
+O [1, 4, 7]
+O [2, 5, 8]
+O [0, 4, 8]
+O [2, 4, 6]
+X wins
 ?[1;31m
 Start test 2?[0m
-Enter cells: > OXO__X_OX
+Enter cells: > XOXOXOXXO
 ---------
+| X O X |
 | O X O |
-| _ _ X |
-| _ O X |
+| X X O |
 ---------
+X [0, 1, 2]
+X [3, 4, 5]
+X [6, 7, 8]
+X [0, 3, 6]
+X [1, 4, 7]
+X [2, 5, 8]
+X [0, 4, 8]
+X [2, 4, 6]
+O [0, 1, 2]
+O [3, 4, 5]
+O [6, 7, 8]
+O [0, 3, 6]
+O [1, 4, 7]
+O [2, 5, 8]
+O [0, 4, 8]
+O [2, 4, 6]
+X wins
 ?[1;31m
 Start test 3?[0m
-Enter cells: > _________
+Enter cells: > XOOOXOXXO
 ---------
-| _ _ _ |
-| _ _ _ |
-| _ _ _ |
+| X O O |
+| O X O |
+| X X O |
 ---------
+X [0, 1, 2]
+X [3, 4, 5]
+X [6, 7, 8]
+X [0, 3, 6]
+X [1, 4, 7]
+X [2, 5, 8]
+X [0, 4, 8]
+X [2, 4, 6]
+O [0, 1, 2]
+O [3, 4, 5]
+O [6, 7, 8]
+O [0, 3, 6]
+O [1, 4, 7]
+O [2, 5, 8]
+O wins
 ?[1;31m
 Start test 4?[0m
-Enter cells: > _O__X___X
+Enter cells: > XOXOOXXXO
+---------
+| X O X |
+| O O X |
+| X X O |
+---------
+X [0, 1, 2]
+X [3, 4, 5]
+X [6, 7, 8]
+X [0, 3, 6]
+X [1, 4, 7]
+X [2, 5, 8]
+X [0, 4, 8]
+X [2, 4, 6]
+O [0, 1, 2]
+O [3, 4, 5]
+O [6, 7, 8]
+O [0, 3, 6]
+O [1, 4, 7]
+O [2, 5, 8]
+O [0, 4, 8]
+O [2, 4, 6]
+Draw
+?[1;31m
+Start test 5?[0m
+Enter cells: > XO_OOX_X_
+---------
+| X O _ |
+| O O X |
+| _ X _ |
+---------
+X [0, 1, 2]
+X [3, 4, 5]
+X [6, 7, 8]
+X [0, 3, 6]
+X [1, 4, 7]
+X [2, 5, 8]
+X [0, 4, 8]
+X [2, 4, 6]
+O [0, 1, 2]
+O [3, 4, 5]
+O [6, 7, 8]
+O [0, 3, 6]
+O [1, 4, 7]
+O [2, 5, 8]
+O [0, 4, 8]
+O [2, 4, 6]
+Game not finished
+?[1;31m
+Start test 6?[0m
+Enter cells: > XO_XO_XOX
+---------
+| X O _ |
+| X O _ |
+| X O X |
+---------
+X [0, 1, 2]
+X [3, 4, 5]
+X [6, 7, 8]
+X [0, 3, 6]
+O [0, 1, 2]
+O [3, 4, 5]
+O [6, 7, 8]
+O [0, 3, 6]
+O [1, 4, 7]
+Impossible
+?[1;31m
+Start test 7?[0m
+Enter cells: > _O_X__X_X
 ---------
 | _ O _ |
-| _ X _ |
-| _ _ X |
+| X _ _ |
+| X _ X |
 ---------
+X [0, 1, 2]
+X [3, 4, 5]
+X [6, 7, 8]
+X [0, 3, 6]
+X [1, 4, 7]
+X [2, 5, 8]
+X [0, 4, 8]
+X [2, 4, 6]
+O [0, 1, 2]
+O [3, 4, 5]
+O [6, 7, 8]
+O [0, 3, 6]
+O [1, 4, 7]
+O [2, 5, 8]
+O [0, 4, 8]
+O [2, 4, 6]
+Impossible
+?[1;31m
+Start test 8?[0m
+Enter cells: > _OOOO_X_X
+---------
+| _ O O |
+| O O _ |
+| X _ X |
+---------
+X [0, 1, 2]
+X [3, 4, 5]
+X [6, 7, 8]
+X [0, 3, 6]
+X [1, 4, 7]
+X [2, 5, 8]
+X [0, 4, 8]
+X [2, 4, 6]
+O [0, 1, 2]
+O [3, 4, 5]
+O [6, 7, 8]
+O [0, 3, 6]
+O [1, 4, 7]
+O [2, 5, 8]
+O [0, 4, 8]
+O [2, 4, 6]
+Impossible
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
