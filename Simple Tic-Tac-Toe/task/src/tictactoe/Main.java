@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
     static Scanner scanner = new Scanner(System.in);
 
-    static List<String> cellInput = new ArrayList<String>();
+    static List<String> cellInput = new ArrayList<String>(Collections.nCopies(9, "_"));
     static int[][] winningCombinations = new int[][]{{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
 
     static int xCount = 0;
@@ -14,21 +14,27 @@ public class Main {
 
     static boolean xWin = false;
     static boolean oWin = false;
+    static boolean draw = false;
+
+    static boolean xTurn = true;
 
     public static void main(String[] args) {
+        startGame();
+    }
 
-        System.out.print("Enter cells: ");
-        Collections.addAll(cellInput, scanner.nextLine().replace("_", " ").split(""));
+    public static void startGame() {
+        createCell();
+        while (!(xWin || oWin || draw)) {
+            getCoordinate();
+        }
 
+        printGameStatus();
+    }
+
+    public static void countCellTypes() {
         xCount = Collections.frequency(cellInput, "X");
         oCount = Collections.frequency(cellInput, "O");
         blankCount = Collections.frequency(cellInput, "_");
-
-
-        createCell();
-        getCoordinate();
-
-        // printGameStatus();
     }
 
     public static void getCoordinate() {
@@ -38,7 +44,7 @@ public class Main {
         int colInt = 0;
 
         while (!valid) {
-            System.out.println("Enter the coordinates: ");
+            System.out.print("Enter the coordinates: ");
             String row = scanner.next();
             String col = scanner.next();
 
@@ -50,7 +56,6 @@ public class Main {
                 if (!checkCoordinateValidity(rowInt, colInt)) {
                     System.out.println("Coordinates should be from 1 to 3!");
                 } else if (!checkCoordinateAvailability(rowInt, colInt)) {
-                    System.out.println(rowInt + " " + colInt);
                     System.out.println("This cell is occupied! Choose another one!");
                 } else {
                     valid = true;
@@ -60,15 +65,19 @@ public class Main {
 
         int cellIndex = convertCoordinateToCellIndex(rowInt, colInt);
         updateCell(cellIndex);
+
+        countCellTypes();
         createCell();
 
+        xWin = checkWinCombinations("X");
+        oWin = checkWinCombinations("O");
+        draw = checkForDraw();
     }
-
 
     static boolean checkCoordinateAvailability(int row, int col) {
         int cellIndex = convertCoordinateToCellIndex(row, col);
 
-        if (cellInput.get(cellIndex).matches(" ")) {
+        if (cellInput.get(cellIndex).matches("_")) {
             return true;
         }
         return false;
@@ -81,57 +90,49 @@ public class Main {
     public static boolean checkCoordinateValidity(int row, int col) {
         if (row < 1 || row > 3 || col < 1 || col > 3) {
             return false;
-
         }
         return true;
     }
 
     public static void updateCell(int cellIndex) {
-        cellInput.set(cellIndex, "X");
+        cellInput.set(cellIndex, xTurn ? "X" : "O");
+        xTurn = !xTurn;
     }
 
 
     public static void createCell() {
         printBoundaries();
 
-        System.out.printf("| %s %s %s |\n", cellInput.get(0), cellInput.get(1), cellInput.get(2));
-        System.out.printf("| %s %s %s |\n", cellInput.get(3), cellInput.get(4), cellInput.get(5));
-        System.out.printf("| %s %s %s |\n", cellInput.get(6), cellInput.get(7), cellInput.get(8));
+        System.out.printf("| %s %s %s |\n", mapCell(0), mapCell(1), mapCell(2));
+        System.out.printf("| %s %s %s |\n", mapCell(3), mapCell(4), mapCell(5));
+        System.out.printf("| %s %s %s |\n", mapCell(6), mapCell(7), mapCell(8));
 
         printBoundaries();
+    }
+
+    public static String mapCell(int cellIndex) {
+        return cellInput.get(cellIndex).matches("_") ? " " : cellInput.get(cellIndex);
     }
 
     public static void printGameStatus() {
         String status = "";
 
-        if (checkImpossibility()) {
-            status = "Impossible";
-        } else if (xWin) {
+        if (xWin) {
             status = "X wins";
         } else if (oWin) {
             status = "O wins";
-        } else if (blankCount == 0) {
+        } else if (draw) {
             status = "Draw";
-        } else {
-            status = "Game not finished";
         }
 
         System.out.println(status);
-
     }
 
-    public static boolean checkImpossibility() {
-        xWin = checkInRowCombinations("X");
-        oWin = checkInRowCombinations("O");
-
-        if (Math.abs(xCount - oCount) > 1 || (xWin && oWin)) {
-            return true;
-        }
-
-        return false;
+    public static boolean checkForDraw() {
+        return blankCount == 0 && xCount + oCount == 9;
     }
 
-    public static boolean checkInRowCombinations(String letter) {
+    public static boolean checkWinCombinations(String letter) {
         boolean comboAvailable = false;
         int comboLength = 0;
 
