@@ -3,6 +3,7 @@ package tictactoe;
 import java.util.*;
 
 public class Main {
+    static Scanner scanner = new Scanner(System.in);
 
     static List<String> cellInput = new ArrayList<String>();
     static int[][] winningCombinations = new int[][]{{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
@@ -15,19 +16,80 @@ public class Main {
     static boolean oWin = false;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter cells: ");
+        Collections.addAll(cellInput, scanner.nextLine().replace("_", " ").split(""));
 
-        Collections.addAll(cellInput, scanner.nextLine().split(""));
         xCount = Collections.frequency(cellInput, "X");
         oCount = Collections.frequency(cellInput, "O");
         blankCount = Collections.frequency(cellInput, "_");
 
+
+        createCell();
+        getCoordinate();
+
+        // printGameStatus();
+    }
+
+    public static void getCoordinate() {
+        boolean valid = false;
+
+        int rowInt = 0;
+        int colInt = 0;
+
+        while (!valid) {
+            System.out.println("Enter the coordinates: ");
+            String row = scanner.next();
+            String col = scanner.next();
+
+            if (!row.matches("\\d") || !col.matches("\\d")) {
+                System.out.println("You should enter numbers!");
+            } else {
+                rowInt = Integer.parseInt(row);
+                colInt = Integer.parseInt(col);
+                if (!checkCoordinateValidity(rowInt, colInt)) {
+                    System.out.println("Coordinates should be from 1 to 3!");
+                } else if (!checkCoordinateAvailability(rowInt, colInt)) {
+                    System.out.println(rowInt + " " + colInt);
+                    System.out.println("This cell is occupied! Choose another one!");
+                } else {
+                    valid = true;
+                }
+            }
+        }
+
+        int cellIndex = convertCoordinateToCellIndex(rowInt, colInt);
+        updateCell(cellIndex);
         createCell();
 
-        printGameStatus();
     }
+
+
+    static boolean checkCoordinateAvailability(int row, int col) {
+        int cellIndex = convertCoordinateToCellIndex(row, col);
+
+        if (cellInput.get(cellIndex).matches(" ")) {
+            return true;
+        }
+        return false;
+    }
+
+    public static int convertCoordinateToCellIndex(int row, int col) {
+        return row > 1 ? (row - 1) * 3 + (col - 1) : col - 1;
+    }
+
+    public static boolean checkCoordinateValidity(int row, int col) {
+        if (row < 1 || row > 3 || col < 1 || col > 3) {
+            return false;
+
+        }
+        return true;
+    }
+
+    public static void updateCell(int cellIndex) {
+        cellInput.set(cellIndex, "X");
+    }
+
 
     public static void createCell() {
         printBoundaries();
